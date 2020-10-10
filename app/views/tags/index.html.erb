@@ -1,0 +1,16 @@
+<h1 class="jumbotron">Tags</h1>
+
+<div class="container">
+
+    <div class="card my-2 p-3">
+        <ul>
+            <% @tags.each do |tag| %>
+            <li>
+                <%= link_to "#{tag.name}", tag_path(tag) %>
+            </li>
+            <hr>
+            <% end %>
+        </ul>
+    </div>
+
+</div>

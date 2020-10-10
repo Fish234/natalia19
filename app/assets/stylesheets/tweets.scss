@@ -1,0 +1,33 @@
+// Place all the styles related to the Tweets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body{
+
+    
+    background-image: image-url("halloween.jpg");
+    font-family: 'Lobster', cursive;
+    background-attachment: fixed;
+    color: black;
+
+    h1{
+        color: white;
+        border-color: black;
+
+    }
+
+    p{
+        font-family: 'Lobster', cursive;
+        font-size: 23px;
+        color: white;
+        
+    }
+
+    div {
+        position: center;
+        border-style: none;
+        background-color: #ff7a1b;
+        color: black;
+    }
+
+
+}

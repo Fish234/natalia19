@@ -1,0 +1,20 @@
+<div class='container'>
+    <h1>Todos los usuarios:</h1>
+    <div class='row'>
+        <div class='col-sm-12'>
+
+            <% @users.each do |user| %>
+            <div class="card border-primary mb-3">
+                <div class="card-body">
+                    <h5 class='cart-title'>Usuario: <%= link_to user.name, user_path(user) %></h5>
+                    <p class='card-text'>Mail: <%= user.email %></p>
+                    <p class='card-text'>Following: <%= user.active_relationships.select(:follower_id).count %></p>
+                    <p class='card-text'>Followers: <%= user.followers.count %></p>
+                    <p class='card-text'>Tweets: <%= user.tweets.count %></p>
+                    <p class='card-text'>Likes: <%= user.likes.count %></p>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>

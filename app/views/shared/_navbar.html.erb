@@ -1,0 +1,41 @@
+<header class="header">
+<nav class="navbar navbar-expand-lg navbar-light bg-warning">
+  <a class="navbar-brand"><%= link_to "Twitter 🎃", tweets_path %></a>
+  <a class="navbar-brand"><%= link_to  "Usuarios 🧛", user_index_path %></a>
+  <a class="navbar-brand"><%= link_to  "Tags 👻", tags_path %></a>
+ 
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse offset-md-8" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto align-item-left">
+      <li class="nav-item dropdown navbar-right">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Menu
+        </a>
+        <form class="form-inline my-2 my-lg-0" action="/search">
+          <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul>
+                <% if current_user %>
+                    <li class="nav-item">
+                        <%= link_to "Salir 👻", destroy_user_session_path, method: :delete %>
+                    </li>
+                <% else %>
+                    <li class="nav-item">
+                        <%= link_to "Registro 🦇", new_user_registration_path %>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to "Ingreso 🧛", new_user_session_path %>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+</header>
