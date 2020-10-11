@@ -15,6 +15,11 @@ class Tweet < ApplicationRecord
     def original_tweet
       Tweet.find(self.origin_tweet)
     end
+    
+    def retweets_of_the_original_tweet
+      tweets = Tweet.where(origin_tweet: self)      
+    end
+
 
     after_create do
       tweet = Tweet.find_by(id: self.id)

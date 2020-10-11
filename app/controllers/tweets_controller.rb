@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :search]
+  before_action :authenticate_user!, except: [:index, :search, :api, :date]
 
   # GET /tweets
   # GET /tweets.json
@@ -8,12 +8,40 @@ class TweetsController < ApplicationController
     @tweets = Tweet.order(created_at: 'desc').page(params[:page]).per(50)
     @tweet = Tweet.new
   end
+  
+  def date
 
+    Tweet.where(:created_at => (params[:fecha1].to_date)..(params[:fecha2].to_date))
+
+  end
+
+  def api
+    @tweets = Tweet.order(id: 'asc').page(params[:page]).per(50)
+    @hashs = []
+    @rewtitted_from = nil
+    @tweets.each do |tweet|
+      if tweet.origin_tweet.nil?
+        
+      else
+        @rewtitted_from = tweet.original_tweet.id
+      end
+      @hash = {
+        :id => tweet.id,
+        :content => tweet.content,
+        :user_id => tweet.user_id,
+        :like_count => tweet.likes.count,
+        :retweets_count => tweet.retweets_of_the_original_tweet.count,
+        :rewtitted_from => @rewtitted_from 
+      }
+      @hashs << @hash
+    end
+    render json: @hashs
+  end
   
   def search
     @tweets =Tweet.where("content LIKE?", "%#{params[:q]}%")
   end
-
+  
   def like
     if current_user
       @tweet = Tweet.find(params[:tweet_id])
@@ -27,7 +55,7 @@ class TweetsController < ApplicationController
     end
     redirect_to root_path
   end
-
+  
   def retweet
     if current_user
       @tweet = Tweet.find(params[:tweet_id])
@@ -37,18 +65,18 @@ class TweetsController < ApplicationController
     end
     redirect_to root_path
   end
-
-
+  
+  
   # GET /tweets/1
   # GET /tweets/1.json
   def show
   end
-
+  
   # GET /tweets/new
   def new
     @tweet = Tweet.new
   end
-
+  
   # GET /tweets/1/edit
   def edit
   end
@@ -108,4 +136,5 @@ class TweetsController < ApplicationController
     def tweet_params
       params.require(:tweet).permit(:content, :user_id, :origin_tweet)
     end
+
 end

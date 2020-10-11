@@ -1,0 +1,1 @@
+json.array!  @date ,partial: ":fecha1/:fecha2", as: :date

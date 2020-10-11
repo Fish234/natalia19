@@ -1,0 +1,1 @@
+json.array! @hashs, partial: "hashs/hash", as: :hash
