@@ -1,1 +1,1 @@
-json.array!  @date ,partial: ":fecha1/:fecha2", as: :date
+json.array! @tweets, partial: "tweets/tweet", as: :tweets

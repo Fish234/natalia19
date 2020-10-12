@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :search, :api, :date]
+  before_action :authenticate_user!, except: [:index, :search, :api, :dare]
 
   # GET /tweets
   # GET /tweets.json
@@ -9,9 +9,10 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new
   end
   
-  def date
+  def dare
 
-    Tweet.where(:created_at => (params[:fecha1].to_date)..(params[:fecha2].to_date))
+    @tweets = Tweet.where(:created_at => (params[:fecha1].to_date)..(params[:fecha2].to_date))
+    render json: @tweets
 
   end
 
